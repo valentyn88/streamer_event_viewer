@@ -133,8 +133,6 @@ func (h Handler) HandleOAuth2Callback(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Printf("Access token: %s\n", token.AccessToken)
-
 	http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 
 	return

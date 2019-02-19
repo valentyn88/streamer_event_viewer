@@ -13,14 +13,14 @@ func NewInMemory() *InMemory {
 	return &InMemory{Values: make([]interface{}, 0)}
 }
 
-// Save saves value to storage by key.
+// Save saves value to storage.
 func (im InMemory) Save(val interface{}) {
 	im.Mux.Lock()
 	im.Values = append(im.Values, val)
 	im.Mux.Unlock()
 }
 
-// Get gets values by key.
+// Get gets last n events.
 func (im InMemory) Last(l int) []interface{} {
 	var res []interface{}
 

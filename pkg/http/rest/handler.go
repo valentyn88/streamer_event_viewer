@@ -19,12 +19,14 @@ import (
 	"github.com/valentyn88/streamer_event_viewer/storage"
 )
 
+// Handler common handler.
 type Handler struct {
 	Storage     storage.Storager
 	CookieStore *sessions.CookieStore
 	Oauth2Cnfg  *oauth2.Config
 }
 
+// HandleRoot handles root request.
 func (h Handler) HandleRoot(w http.ResponseWriter, r *http.Request) {
 	session, err := h.CookieStore.Get(r, oauthSessionName)
 	if err != nil {
@@ -58,6 +60,7 @@ func (h Handler) HandleRoot(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(fmt.Sprintf(body, loginLink, userPart)))
 }
 
+// HandleLogin handles logib request.
 func (h Handler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	var tokenBytes [255]byte
 	if _, err := rand.Read(tokenBytes[:]); err != nil {
@@ -73,6 +76,7 @@ func (h Handler) HandleLogin(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// HandleOAuth2Callback handles oauth request.
 func (h Handler) HandleOAuth2Callback(w http.ResponseWriter, r *http.Request) {
 	session, err := h.CookieStore.Get(r, oauthSessionName)
 	if err != nil {
@@ -138,6 +142,7 @@ func (h Handler) HandleOAuth2Callback(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// HandleSubscribeForm handles subscription form request.
 func (h Handler) HandleSubscribeForm(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.WriteHeader(http.StatusOK)
@@ -153,6 +158,7 @@ func (h Handler) HandleSubscribeForm(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(html))
 }
 
+// HandleSubscribe handles subscription request.
 func (h Handler) HandleSubscribe(w http.ResponseWriter, r *http.Request) {
 	name := r.FormValue("name")
 	if name == "" {
@@ -264,6 +270,7 @@ func (h Handler) HandleSubscribe(w http.ResponseWriter, r *http.Request) {
 	w.Write(body)
 }
 
+// HandleSubscriptionEvents handles subscription events request.
 func (h Handler) HandleSubscriptionEvents(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
@@ -277,6 +284,7 @@ func (h Handler) HandleSubscriptionEvents(w http.ResponseWriter, r *http.Request
 	h.Storage.Save(body)
 }
 
+// HandleLivestream handles livestream request.
 func (h Handler) HandleLivestream(w http.ResponseWriter, r *http.Request) {
 	session, err := h.CookieStore.Get(r, oauthSessionName)
 	if err != nil {
@@ -336,6 +344,7 @@ func (h Handler) HandleLivestream(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
+// HandleLogout handles logout request.
 func (h Handler) HandleLogout(w http.ResponseWriter, r *http.Request) {
 	session, err := h.CookieStore.Get(r, oauthSessionName)
 	if err != nil {

@@ -1,5 +1,6 @@
 package streamer_event_viewer
 
+// SubscriptionBody subscription body.
 type SubscriptionBody struct {
 	Callback string `json:"hub.callback"`
 	Mode     string `json:"hub.mode"`

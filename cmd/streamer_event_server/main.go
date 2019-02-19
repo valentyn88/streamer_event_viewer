@@ -53,6 +53,6 @@ func main() {
 	http.HandleFunc("/logout", h.HandleLogout)
 
 	if err := http.ListenAndServe(":7001", nil); err != nil {
-		log.Fatalf("couldn't start password server error: %s", err.Error())
+		log.Fatalf("couldn't start streamer event server error: %s", err.Error())
 	}
 }

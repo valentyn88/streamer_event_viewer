@@ -42,8 +42,9 @@ Run in the project root folder (Linux)
 1. Move clientID, clientSecret to ENV variables
 2. Add Dockerfile to have a change to run application as a container
 3. Cover code by Unit test
-4. Store streamer events in database instead memory
-5. Use Redis or some other storage for managing user sessions
+4. Run linters
+5. Store streamer events in database instead memory
+6. Use Redis or some other storage for managing user sessions
 
 ## Issues
 1. Twitch can send you some events just in case your API can be reached via https, so in this case I decided to mock event subscription URL and just used ```https://twitch.free.beeceptor.com/subscription``` for this purpose.

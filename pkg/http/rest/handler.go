@@ -10,11 +10,10 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/gorilla/sessions"
 	"golang.org/x/oauth2"
-
-	"strings"
 
 	sev "github.com/valentyn88/streamer_event_viewer"
 	"github.com/valentyn88/streamer_event_viewer/storage"

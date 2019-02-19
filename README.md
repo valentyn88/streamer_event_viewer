@@ -49,3 +49,15 @@ Run in the project root folder (Linux)
 ## Issues
 1. Twitch can send you some events just in case your API can be reached via https, so in this case I decided to mock event subscription URL and just used ```https://twitch.free.beeceptor.com/subscription``` for this purpose.
 It means that use can subscribe for some events, but can't get real notifications from Twitch.
+
+## How would you deploy the above on AWS?
+I would Dockerize my application run a cluster of EC2 instances with Docker in Swarm mode or Kubernetes. I also would configure Jenkins CI/CD or gitlab CI/CD to deliver new images of my application, run linters and tests.
+
+## Where do you see bottlenecks in your proposed architecture and how would you approach scaling this app starting from 100 reqs/day to 900MM reqs/day over 6 months?
+
+Bottlenecks:
+1. Managing user sessions, updating Twitch token.
+2. Managing and storing streamer events. For the streamer events, I would use some queue, for example, RabbitMQ and a bunch of workers that can handle events from RabbitMQ and store it in a database. 
+
+Scaling:
+In case we use Kubernetes it is easy to add new EC instance to the cluster and run additional instances of our application depends on CPU or Memory loading. 
